@@ -1,0 +1,37 @@
+# Variables
+variable sysname index mixture
+variable fname index data.${sysname}										
+variable simname index min
+
+# Initialization
+units			    real										
+boundary			p p p										
+atom_style		    full										
+log			        log.${sysname}_${simname}								
+
+# Force Fields
+neighbor			2.0 bin										
+neigh_modify		delay 0 every 1 check yes		
+special_bonds		lj/coul 0.0 0.0 0.5						 								 
+bond_style		    harmonic										
+angle_style		    harmonic
+dihedral_style      fourier
+improper_style      cvff
+pair_style		    lj/cut/coul/long 12.0													
+kspace_style        pppm 1.0e-4									
+
+# Atom Definitions
+read_data			../${fname}	
+
+# Settings
+thermo_style 		custom step cpu etotal ke pe ebond eangle edihed eimp epair evdwl ecoul elong fmax fnorm 
+thermo 				4
+min_style			sd
+dump 			    1 all custom 5000 dump.min.*.dump id mol type element mass q x y z xu yu zu ix iy iz vx vy vz fx fy fz
+dump_modify			1 $dump_modify_elements
+minimize			1e-20 1000 50000 500000																
+min_style			cg										
+minimize			1e-4 1e-4 99000 990000
+
+write_restart		restart.${simname}
+write_data 		    data.${sysname}_${simname}								

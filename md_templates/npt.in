@@ -1,0 +1,40 @@
+# Variables
+variable sysname index mixture
+variable rname index restart.min										
+variable simname index npt
+
+# Initialization
+units			    real										
+boundary			p p p										
+atom_style		    full										
+log			        log.${sysname}_${simname}								
+
+# Force Fields
+neighbor			2.0 bin										
+neigh_modify		delay 0 every 1 check yes		
+special_bonds		lj/coul 0.0 0.0 0.5						 								 
+bond_style		    harmonic										
+angle_style		    harmonic
+dihedral_style      fourier
+improper_style      cvff
+pair_style		    lj/cut/coul/long 12.0													
+kspace_style        pppm 1.0e-4									
+
+# Atom Definitions 						
+read_restart		../min/${rname}
+
+# Settings		
+velocity            all create 298.15 150000
+fix 			    1 all npt temp 298.15 298.15 100.0 iso 1.0 1.0 1000.0	
+thermo			    1000
+thermo_style 		custom step cpu temp press vol etotal ke pe ebond eangle edihed eimp epair evdwl ecoul elong fmax fnorm lx density
+timestep 			1.0
+reset_timestep		0
+dump 			    1 all custom 50000 dump.npt.*.dump id mol type element mass q x y z xu yu zu ix iy iz vx vy vz fx fy fz
+dump_modify			1 $dump_modify_elements
+restart             100 restart.${simname}_r restart.${simname}_r
+run 				2000000		
+unfix 				1
+
+write_restart	    restart.${simname}
+write_data 		    data.${sysname}_${simname}
