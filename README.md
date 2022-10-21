@@ -8,8 +8,7 @@
 * [Citation](#citation-)
 * [Licensing](#licensing-)
 * [Contact](#contact-)
-* 
-* 
+
 ## Overview [↑](#overview)
 The Computational Database for Li-S Batteries (ComBat) is a publicly 
 available dataset of quantum-chemical and molecular dynamics properties 
