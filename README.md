@@ -4,6 +4,7 @@
 
 ## Contents
 * [Overview](#overview-)
+* [Contents](#contents-)
 * [Updates](#updates-)
 * [Citation](#citation-)
 * [Licensing](#licensing-)
@@ -21,6 +22,24 @@ polarizabilities, dipole moments, as well as MD-derived properties, such
 as radial distribution functions, coordination numbers, diffusion coefficients,
 and more. More details about each property can be found in the ReadME file 
 associated with each dataset. 
+
+## Contents [↑](#contents)
+* data.csv: A CSV file containing the solvent metadata and electrolyte properties
+
+| Column    | Description                        |
+|-----------|------------------------------------|
+| Abbreviation | Common abbreviation of the solvent |
+| Type | Chemical class of the solvent      |
+| InChI Key | InChI Key of the solvent           |
+| InChI | InChI of the solvent               |
+| CanonicalSMILES | SMILES of the solvent              |   
+| IUPACName | IUPAC name of the solvent          |
+| CAS | CAS number of the solvent          |
+| CID | PubChem CID of the solvent         |
+| MolecularFormula | Molecular formula of the solvent   |
+| MolecularWeight | Molecular weight of the solvent    |
+| Density | Density of the solvent (from public databases) |
+| DN| Donor number of the solvent (from public databases & literature) |
 
 ## Updates [↑](#updates)
 For a description of the updates corresponding to each version, 
