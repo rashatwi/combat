@@ -12,35 +12,11 @@ from pymatgen.core.structure import Molecule
 
 lpad = LaunchPad.auto_load()
 
-type_cosolvent = "DMT"
-name_cosolvent = "dmt"
-df = pd.read_csv("data/data.csv")
-number_molecules = number_molecules(type_cosolvent, df, conc_ps=0.25)
-eps = epsilon(type_cosolvent, df)
-tfsi_charges = [
-    -0.66,
-    1.02,
-    -0.53,
-    -0.53,
-    0.35,
-    -0.16,
-    -0.16,
-    -0.16,
-    1.02,
-    -0.53,
-    -0.53,
-    0.35,
-    -0.16,
-    -0.16,
-    -0.16,
-]
-ps_charges = [-0.6223, -0.1259, -0.1259, -0.1259, -0.1259, -0.6223, -0.1259, -0.1259]
-li_charges = [1]
-tfsi_charges = [i / np.sqrt(eps) for i in tfsi_charges]
-ps_charges = [i / np.sqrt(eps) for i in ps_charges]
-li_charges = [i / np.sqrt(eps) for i in li_charges]
+working_dir = os.getcwd()
+df = pd.read_csv(f"{working_dir}/data.csv")
 
-li = Molecule.from_file("li.pdb")
+# define cation force field parameters
+li = Molecule.from_file(f"{working_dir}/pdb/Li.pdb")
 li.set_charge_and_spin(1, 1)
 li_param = {
     "Molecule": li,
@@ -52,10 +28,11 @@ li_param = {
     "Dihedrals": [],
     "Impropers": [],
     "Improper Topologies": None,
-    "Charges": np.asarray(li_charges),
+    "Charges": np.asarray([1]),
 }
 
-ps = Molecule.from_file("ps.pdb")
+# define polysulfide force field parameters
+ps = Molecule.from_file(f"{working_dir}/pdb/S8.pdb")
 ps.set_charge_and_spin(-2, 1)
 ps_param = {
     "Molecule": ps,
@@ -115,10 +92,22 @@ ps_param = {
     ],
     "Impropers": [],
     "Improper Topologies": None,
-    "Charges": np.asarray(ps_charges),
+    "Charges": np.asarray(
+        [
+            -0.6223,
+            -0.1259,
+            -0.1259,
+            -0.1259,
+            -0.1259,
+            -0.6223,
+            -0.1259,
+            -0.1259,
+        ]
+    ),
 }
 
-tfsi = Molecule.from_file("tfsi.pdb")
+# define anion force field parameters
+tfsi = Molecule.from_file(f"{working_dir}/pdb/TFSI.pdb")
 tfsi.set_charge_and_spin(-1, 1)
 tfsi_param = {
     "Molecule": tfsi,
@@ -165,9 +154,18 @@ tfsi_param = {
         {"coeffs": [80.20, 125.6], "types": [("st", "nt", "st")]},
     ],
     "Dihedrals": [
-        {"coeffs": ["fourier", 1, 0.1734, 3, 0], "types": [("ot", "st", "ct", "ft")]},
-        {"coeffs": ["fourier", 1, 0.158, 3, 0], "types": [("nt", "st", "ct", "ft")]},
-        {"coeffs": ["fourier", 1, -0.0018, 3, 0], "types": [("ot", "st", "nt", "st")]},
+        {
+            "coeffs": ["fourier", 1, 0.1734, 3, 0],
+            "types": [("ot", "st", "ct", "ft")],
+        },
+        {
+            "coeffs": ["fourier", 1, 0.158, 3, 0],
+            "types": [("nt", "st", "ct", "ft")],
+        },
+        {
+            "coeffs": ["fourier", 1, -0.0018, 3, 0],
+            "types": [("ot", "st", "nt", "st")],
+        },
         {
             "coeffs": ["fourier", 3, 3.91646, 1, 0, -1.245, 2, 180, -0.3818, 3, 0],
             "types": [("ct", "st", "nt", "st")],
@@ -175,69 +173,175 @@ tfsi_param = {
     ],
     "Impropers": [],
     "Improper Topologies": None,
-    "Charges": np.asarray(tfsi_charges),
+    "Charges": np.asarray(
+        [
+            -0.66,
+            1.02,
+            -0.53,
+            -0.53,
+            0.35,
+            -0.16,
+            -0.16,
+            -0.16,
+            1.02,
+            -0.53,
+            -0.53,
+            0.35,
+            -0.16,
+            -0.16,
+            -0.16,
+        ]
+    ),
 }
 
-system_species_data = {
-    "dol": {
-        "molecule": "dol.pdb",
-        "molecule_operation_type": "get_from_file",
-        "ff_param_method": "get_from_opls",
-        "ff_param_data": "dol.pdb",
-        "mol_mixture_type": "Solvents",
-        "mixture_data": number_molecules["dol"],
-        "save_ff_to_file": True,
-    },
-    name_cosolvent: {
-        "molecule": f"{name_cosolvent}.pdb",
-        "molecule_operation_type": "get_from_mol",
-        "ff_param_method": "get_from_opls",
-        "ff_param_data": f"{name_cosolvent}.pdb",
-        "mol_mixture_type": "Solvents",
-        "mixture_data": number_molecules[type_cosolvent],
-        "save_ff_to_file": True,
-    },
-    "tfsi": {
-        "molecule": tfsi,
-        "molecule_operation_type": "get_from_mol",
-        "ff_param_method": "get_from_dict",
-        "ff_param_data": tfsi_param,
-        "mol_mixture_type": "Solutes",
-        "mixture_data": number_molecules["salt"],
-        "save_ff_to_file": True,
-    },
-    "ps": {
-        "molecule": ps,
-        "molecule_operation_type": "get_from_mol",
-        "ff_param_method": "get_from_dict",
-        "ff_param_data": ps_param,
-        "mol_mixture_type": "Solutes",
-        "mixture_data": number_molecules["ps"],
-        "save_ff_to_file": True,
-    },
-    "li": {
-        "molecule": li,
-        "molecule_operation_type": "get_from_mol",
-        "ff_param_method": "get_from_dict",
-        "ff_param_data": li_param,
-        "mol_mixture_type": "Solutes",
-        "mixture_data": number_molecules["li"],
-        "save_ff_to_file": True,
-    },
-}
-
-wf = lammps_workflow(
-    system_species_data=system_species_data,
-    system_mixture_type="number of molecules",
-    box_data=60.0,
-    box_data_type="cubic",
-    recipe=[
-        ["min", ["template_filename", "min.in"]],
-        ["npt", ["template_filename", "npt.in"]],
-        ["melt_quench", ["template_filename", "melt_quench.in"]],
-        ["nvt", ["template_filename", "nvt.in"]],
+# define DOL force field parameters
+dol = Molecule.from_file(f"{working_dir}/pdb/DOL.pdb")
+dol.set_charge_and_spin(0, 1)
+dol_param = {
+    "Molecule": dol,
+    "Labels": ["os", "os", "ct", "ct", "co", "hc", "hc", "hc", "hc", "hc", "hc"],
+    "Masses": OrderedDict({"os": 16.00, "ct": 12.01, "co": 12.01, "hc": 1.008}),
+    "Nonbond": [[0.14, 2.9], [0.066, 3.5], [0.066, 3.5], [0.03, 2.5]],
+    "Bonds": [
+        {"coeffs": [320.0, 1.41], "types": [("ct", "os")]},
+        {"coeffs": [320.0, 1.38], "types": [("co", "os")]},
+        {"coeffs": [268.0, 1.529], "types": [("ct", "ct")]},
+        {"coeffs": [340.0, 1.09], "types": [("ct", "hc")]},
+        {"coeffs": [340.0, 1.09], "types": [("co", "hc")]},
     ],
-    template_dir="data/templates",
-)
+    "Angles": [
+        {"coeffs": [60.0, 109.5], "types": [("co", "os", "ct")]},
+        {"coeffs": [50.0, 109.5], "types": [("ct", "ct", "os")]},
+        {"coeffs": [35.0, 109.5], "types": [("hc", "ct", "os")]},
+        {"coeffs": [37.5, 110.7], "types": [("ct", "ct", "hc")]},
+        {"coeffs": [33.0, 107.8], "types": [("hc", "ct", "hc")]},
+        {"coeffs": [92.6, 111.55], "types": [("os", "co", "os")]},
+        {"coeffs": [35.0, 109.5], "types": [("hc", "co", "os")]},
+        {"coeffs": [33.0, 109.5], "types": [("hc", "co", "hc")]},
+    ],
+    "Dihedrals": [
+        {
+            "coeffs": ["fourier", 3, 0.0625, 1, 0, -0.011, 2, 180, 0.2805, 3, 0],
+            "types": [("ct", "os", "ct", "ct")],
+        },
+        {
+            "coeffs": ["fourier", 3, 0.0625, 1, 0, -0.011, 2, 180, 0.2805, 3, 0],
+            "types": [("co", "os", "ct", "ct")],
+        },
+        {
+            "coeffs": ["fourier", 1, 0.3705, 3, 0],
+            "types": [("ct", "os", "ct", "hc")],
+        },
+        {
+            "coeffs": ["fourier", 1, 0.3705, 3, 0],
+            "types": [("co", "os", "ct", "hc")],
+        },
+        {
+            "coeffs": ["fourier", 3, -0.5335, 1, 0, -0.7835, 2, 180, 0.3375, 3, 0],
+            "types": [("ct", "os", "co", "os")],
+        },
+        {
+            "coeffs": ["fourier", 1, 0.3705, 3, 0],
+            "types": [("ct", "os", "co", "hc")],
+        },
+        {
+            "coeffs": ["fourier", 3, 1.119, 1, 0, -1.1635, 2, 180, -0.3415, 3, 0],
+            "types": [("os", "ct", "ct", "os")],
+        },
+        {
+            "coeffs": ["fourier", 1, 0.234, 3, 0],
+            "types": [("hc", "ct", "ct", "os")],
+        },
+        {"coeffs": ["fourier", 1, 0.15, 3, 0], "types": [("hc", "ct", "ct", "hc")]},
+    ],
+    "Impropers": [],
+    "Improper Topologies": None,
+    "Charges": np.asarray(
+        [
+            -0.4000,
+            -0.4000,
+            0.1400,
+            0.1400,
+            0.2000,
+            0.0300,
+            0.0300,
+            0.0300,
+            0.0300,
+            0.1000,
+            0.1000,
+        ]
+    ),
+}
 
-lpad.add_wf(wf)
+for solvent in df["Abbreviation"]:
+    if solvent != "DOL":
+        type_cosolvent = solvent
+        name_cosolvent = solvent.lower()
+        num_mols = number_molecules(type_cosolvent, df, conc_ps=0.25)
+        charge_scaling_factor = 1 / np.sqrt(epsilon(type_cosolvent, df))
+        system_species_data = {
+            "dol": {
+                "molecule": dol,
+                "molecule_operation_type": "get_from_mol",
+                "ff_param_method": "get_from_dict",
+                "ff_param_data": dol_param,
+                "mol_mixture_type": "Solvents",
+                "mixture_data": num_mols["dol"],
+                "save_ff_to_file": True,
+            },
+            name_cosolvent: {
+                "molecule": f"{working_dir}/pdb/{name_cosolvent}.pdb",
+                "molecule_operation_type": "get_from_file",
+                "ff_param_method": "get_from_opls",
+                "ff_param_data": f"{working_dir}/pdb/{name_cosolvent}.pdb",
+                "mol_mixture_type": "Solvents",
+                "mixture_data": num_mols[type_cosolvent],
+                "save_ff_to_file": True,
+            },
+            "tfsi": {
+                "molecule": tfsi,
+                "molecule_operation_type": "get_from_mol",
+                "ff_param_method": "get_from_dict",
+                "ff_param_data": tfsi_param,
+                "mol_mixture_type": "Solutes",
+                "mixture_data": num_mols["salt"],
+                "save_ff_to_file": True,
+            },
+            "ps": {
+                "molecule": ps,
+                "molecule_operation_type": "get_from_mol",
+                "ff_param_method": "get_from_dict",
+                "ff_param_data": ps_param,
+                "mol_mixture_type": "Solutes",
+                "mixture_data": num_mols["ps"],
+                "save_ff_to_file": True,
+            },
+            "li": {
+                "molecule": li,
+                "molecule_operation_type": "get_from_mol",
+                "ff_param_method": "get_from_dict",
+                "ff_param_data": li_param,
+                "mol_mixture_type": "Solutes",
+                "mixture_data": num_mols["li"],
+                "save_ff_to_file": True,
+            },
+        }
+
+        wf = lammps_workflow(
+            system_species_data=system_species_data,
+            system_mixture_type="number of molecules",
+            box_data=60.0,
+            box_data_type="cubic",
+            scale_charges=True,
+            charge_scaling_factor=charge_scaling_factor,
+            working_dir=f"{working_dir}/{name_cosolvent}",
+            recipe=[
+                ["min", ["template_filename", "min.in"]],
+                ["npt", ["template_filename", "npt.in"]],
+                ["melt_quench", ["template_filename", "melt_quench.in"]],
+                ["nvt", ["template_filename", "nvt.in"]],
+            ],
+            template_dir=f"{working_dir}/md_templates",
+        )
+
+        lpad.add_wf(wf)
