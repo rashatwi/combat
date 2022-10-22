@@ -1,7 +1,9 @@
 def epsilon(cosolvent, data):
     """
-    Calculates the number of species of each type for a solution of 1 M LiTFSI,
-    0.25 M Li2S8, in 1:1 DOL:cosolvent mixture.
+    Calculates the electronic high-frequency dielectric permittivity of
+    the solvent mixture composed of DOL and a cosolvent using the
+    refractive index of each solvent
+
     Parameters
     ----------
     cosolvent: str
@@ -12,7 +14,6 @@ def epsilon(cosolvent, data):
     Returns
     -------
     e: float
-
     """
     e1 = data[data["Abbreviation"] == "DOL"]["Refraction"].values[0]
     e2 = data[data["Abbreviation"] == cosolvent]["Refraction"].values[0]
