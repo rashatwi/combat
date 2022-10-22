@@ -26,20 +26,27 @@ associated with each dataset.
 ## Contents [↑](#contents)
 * data.csv: A CSV file containing the solvent metadata and electrolyte properties
 
-| Column    | Description                        |
-|-----------|------------------------------------|
-| Abbreviation | Common abbreviation of the solvent |
-| Type | Chemical class of the solvent      |
-| InChI Key | InChI Key of the solvent           |
-| InChI | InChI of the solvent               |
-| CanonicalSMILES | SMILES of the solvent              |   
-| IUPACName | IUPAC name of the solvent          |
-| CAS | CAS number of the solvent          |
-| CID | PubChem CID of the solvent         |
-| MolecularFormula | Molecular formula of the solvent   |
-| MolecularWeight | Molecular weight of the solvent    |
-| Density | Density of the solvent (from public databases) |
-| DN| Donor number of the solvent (from public databases & literature) |
+| Column        | Description                                                               |
+|---------------|---------------------------------------------------------------------------|
+| Abbreviation  | Common abbreviation of the solvent                                        |
+| Type          | Chemical class of the solvent                                             |
+| InChI Key     | InChI Key of the solvent                                                  |
+| InChI         | InChI of the solvent                                                      |
+| CanonicalSMILES | SMILES of the solvent                                                     |   
+| IUPACName     | IUPAC name of the solvent                                                 |
+| CAS           | CAS number of the solvent                                                 |
+| CID           | PubChem CID of the solvent                                                |
+| MolecularFormula | Molecular formula of the solvent                                          |
+| MolecularWeight | Molecular weight of the solvent                                           |
+| Density       | Density of the solvent (from public databases)                            |
+| DN            | Donor number of the solvent (from public databases & literature)          |
+| De            | Dielectric constant of the solvent (from public databases & literature)   |
+| Viscosity     | Viscosity of the solvent (from public databases & literature)             |
+| Refraction    | Refraction index of the solvent (from ChemSpider)                         |
+| FlashPoint    | Flash point of the solvent in °C (from public databases & literature)     |             | 
+| MeltingPoint  | Melting point of the solvent in °C (from public databases & literature)   |
+| BoilingPoint  | Boiling point of the solvent in °C (from public databases & literature)   |
+| DensityT | Temperature in °C at which the density was measured (from public databases) |
 
 ## Updates [↑](#updates)
 For a description of the updates corresponding to each version, 
