@@ -5,6 +5,19 @@
 ## Contents
 * [Overview](#overview-)
 * [Contents](#contents-)
+  * data.csv (#data.csv-)
+  * binding_energy (#binding_energy-)
+  * coordination_numbers (#coordination_numbers-)
+  * data_files (#data_files-)
+  * diffusion (#diffusion-)
+  * electronic (#electronic-)
+  * force_field (#force_field-)
+  * md_templates (#md_templates-)
+  * pdb (#pdb-)
+  * polysulfide_clustering (#polysulfide_clustering-)
+  * radial_distribution_functions (#radial_distribution_functions-)
+  * scripts (#scripts-)
+  * solvation_structures (#solvation_structures-)
 * [Updates](#updates-)
 * [Citation](#citation-)
 * [Licensing](#licensing-)
@@ -24,7 +37,7 @@ and more. More details about each property can be found in the ReadME file
 associated with each dataset. 
 
 ## Contents [↑](#contents)
-### data.csv
+### data.csv [↑](#data.csv)
 
 A CSV file containing the solvent metadata and the following properties:
 
@@ -82,7 +95,7 @@ A CSV file containing the solvent metadata and the following properties:
 | Visc_STD | Standard deviation of the viscosity of the electrolyte in Pa s (from MD simulations of 1 M LiTFSI in DOL/solvent (1/1, v/v))                      |
 | Group | Group of the solvent (classification based on the electrolyte dynamical properties)                                                                        |
 
-### binding_energy 
+### binding_energy [↑](#binding_energy)
 * single_molecules: raw json files for the DFT calculations of the single solvent molecules 
 * solvent_polysulfide: raw json files for the DFT calculations of the solvent-polysulfide complexes
 * solvent_salt: raw json files for the DFT calculations of the solvent-tfsi complexes
@@ -90,27 +103,27 @@ A CSV file containing the solvent metadata and the following properties:
 Binding energy calculations involved optimization and frequency calculations 
 of each set at the B3LYP/6-31+G* level of theory in the gas phase. 
 
-### coordination_numbers 
+### coordination_numbers [↑](#coordination_numbers)
 
-### data_files 
+### data_files [↑](#data_files)
 
-### diffusion
+### diffusion [↑](#diffusion)
 
-### electronic 
+### electronic [↑](#electronic)
 
-### force_field 
+### force_field [↑](#force_field)
 
-### md_templates 
+### md_templates [↑](#md_templates)
 
-### pdb 
+### pdb [↑](#pdb)
 
-### polysulfide_clustering 
+### polysulfide_clustering [↑](#polysulfide_clustering)
 
-### radial_distribution_functions 
+### radial_distribution_functions [↑](#radial_distribution_functions)
 
-### scripts 
+### scripts [↑](#scripts)
 
-### solvation_structures 
+### solvation_structures [↑](#solvation_structures)
 
 ## Updates [↑](#updates)
 For a description of the updates corresponding to each version, 
