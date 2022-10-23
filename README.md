@@ -82,6 +82,36 @@ A CSV file containing the solvent metadata and the following properties:
 | Visc_STD | Standard deviation of the viscosity of the electrolyte in Pa s (from MD simulations of 1 M LiTFSI in DOL/solvent (1/1, v/v))                      |
 | Group | Group of the solvent (classification based on the electrolyte dynamical properties)                                                                        |
 
+### binding_energy 
+* single_molecules: raw json files for the DFT calculations of the single solvent molecules 
+* solvent_polysulfide: raw json files for the DFT calculations of the solvent-polysulfide complexes
+* solvent_salt: raw json files for the DFT calculations of the solvent-tfsi complexes
+
+Binding energy calculations involved optimization and frequency calculations 
+of each set at the B3LYP/6-31+G* level of theory in the gas phase. 
+
+### coordination_numbers 
+
+### data_files 
+
+### diffusion
+
+### electronic 
+
+### force_field 
+
+### md_templates 
+
+### pdb 
+
+### polysulfide_clustering 
+
+### radial_distribution_functions 
+
+### scripts 
+
+### solvation_structures 
+
 ## Updates [↑](#updates)
 For a description of the updates corresponding to each version, 
 see [updates.md](https://github.com/rashatwi/combat/blob/main/updates.md).
