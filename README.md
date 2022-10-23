@@ -24,7 +24,9 @@ and more. More details about each property can be found in the ReadME file
 associated with each dataset. 
 
 ## Contents [↑](#contents)
-* data.csv: A CSV file containing the solvent metadata and the following properties:
+### data.csv
+
+A CSV file containing the solvent metadata and the following properties:
 
 | Column           | Description                                                                                                                                       |
 |------------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
