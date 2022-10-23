@@ -104,18 +104,26 @@ Binding energy calculations involved optimization and frequency calculations
 of each set at the B3LYP/6-31+G* level of theory in the gas phase. 
 
 ### coordination_numbers [↑](#coordination_numbers)
+raw csv files for the coordination numbers of the electrolyte components with Li+ cation in each system 
 
 ### data_files [↑](#data_files)
+LAMMPS data files used to run MD simulations of electrolyte systems composed of 1 M LiTSI, 0.25 M Li2S8 in DOL/solvent (1/1, v/v)
 
 ### diffusion [↑](#diffusion)
+raw csv files for the diffusion coefficients, standard deviation, and R2 values of the electrolyte components in each system composed of 1 M LiTSI, 0.25 M Li2S8 in DOL/solvent (1/1, v/v)
 
 ### electronic [↑](#electronic)
+raw json files for the DFT calculations of the partial charges on the single solvent molecules. 
+ESP charges were calculated at the B3LYP/6-31+G* level of theory in the gas phase.
 
 ### force_field [↑](#force_field)
+json files containing the solvent force field parameters (OPLS/AA) used to run the MD simulations. 
 
 ### md_templates [↑](#md_templates)
+LAMMPS template files used to run the following MD steps: minimization, NPT equilibration, melting and quenching, and NVT production
 
 ### pdb [↑](#pdb)
+PDB files of the optimized structure of the individual electrolyte components 
 
 ### polysulfide_clustering [↑](#polysulfide_clustering)
 
@@ -132,7 +140,7 @@ see [updates.md](https://github.com/rashatwi/combat/blob/main/updates.md).
 ## Citation [↑](#citation)
 MISPR software, which was used to produce the ComBat database, was
 introduced [here](https://doi.org/10.1038/s41598-022-20009-w). 
-Please include this citation where relevant. 
+Please include its citation where relevant. 
 
 ## Licensing [↑](#licensing)
 The ComBat Database is made publicly available under a CC BY 4.0 license. 
