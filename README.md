@@ -136,10 +136,13 @@ a PS of a given size.
 raw csv files for the radial distribution function of the electrolyte components with Li+ cation in each system 
 
 ### scripts [↑](#scripts)
-* **run_md.py**: Sample scripts for running the automated MD simulations of the 
+* **run_md.py**: script for running the automated MD simulations of the 
 electrolyte systems composed of 1 M LiTSI, 0.25 M Li2S8 in DOL/solvent 
 (1/1, v/v) using MISPR
-* 
+* **calc_be.py**: script for running the automated binding energy calculations 
+between the solvents and each of LiTFSI and Li2S8 using MISPR
+* **calc_elec.py**: script for running the automated ESP calculations 
+for each solvent molecule using MISPR 
 
 ### solvation_structures [↑](#solvation_structures)
 top structures (in the form of XYZ files) corresponding to the first solvation 
