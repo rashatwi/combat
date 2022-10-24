@@ -126,12 +126,25 @@ LAMMPS template files used to run the following MD steps: minimization, NPT equi
 PDB files of the optimized structure of the individual electrolyte components 
 
 ### polysulfide_clustering [↑](#polysulfide_clustering)
+csv files containing the unique PS clusters, i.e. coordination environment 
+of terminal sulfur atoms of the polysulfide anion, formed in each electrolyte system, 
+along with their mode of coordination and probability of formation in the solution. 
+The data in these files is used in computing the probability of formation of 
+a PS of a given size.
 
 ### radial_distribution_functions [↑](#radial_distribution_functions)
+raw csv files for the radial distribution function of the electrolyte components with Li+ cation in each system 
 
 ### scripts [↑](#scripts)
+* **run_md.py**: Sample scripts for running the automated MD simulations of the 
+electrolyte systems composed of 1 M LiTSI, 0.25 M Li2S8 in DOL/solvent 
+(1/1, v/v) using MISPR
+* 
 
 ### solvation_structures [↑](#solvation_structures)
+top structures (in the form of XYZ files) corresponding to the first solvation 
+shell of Li+ in each electrolyte system, along with a csv file containing 
+the type of coordination in each structure and its probability of formation 
 
 ## Updates [↑](#updates)
 For a description of the updates corresponding to each version, 
