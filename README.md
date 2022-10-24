@@ -33,8 +33,7 @@ The data includes DFT-optimized geometries (in PDB format) and several
 properties, such as binding energies, partial atomic charges, 
 polarizabilities, dipole moments, as well as MD-derived properties, such
 as radial distribution functions, coordination numbers, diffusion coefficients,
-and more. More details about each property can be found in the ReadME file 
-associated with each dataset. 
+and more. More details about each property can be found below. 
 
 ## Contents [↑](#contents)
 ### data.csv [↑](#data.csv)
